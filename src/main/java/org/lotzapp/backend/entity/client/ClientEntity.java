@@ -20,11 +20,13 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     @ToString.Exclude
     private List<DeliveryRhythmEntity> deliveryRhythms;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     @ToString.Exclude
     private List<LocationEntity> locations;
 

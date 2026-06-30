@@ -51,3 +51,13 @@ package. [Stackoverflow article about jakarta.persistence](https://stackoverflow
 
 
 
+# Next steps:
+
+* Products 
+  * when product has "sortiment", this is one of my products
+  * when only clientId is set, the product is from a partner and not my product
+* Prices
+* Availability
+
+
+
