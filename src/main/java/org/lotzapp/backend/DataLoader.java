@@ -1,6 +1,7 @@
 package org.lotzapp.backend;
 
 import lombok.extern.slf4j.Slf4j;
+import org.lotzapp.backend.service.product.ProductService;
 import org.lotzapp.component.ClientComponent;
 import org.lotzapp.component.OrderComponent;
 import org.lotzapp.component.ProductComponent;
@@ -15,11 +16,14 @@ public class DataLoader implements CommandLineRunner {
     private final ProductComponent productComponent;
     private final OrderComponent orderComponent;
 
+    private final ProductService productService;
+
     @Autowired
-    public DataLoader(ClientComponent clientComponent, ProductComponent productComponent, OrderComponent orderComponent) {
+    public DataLoader(ClientComponent clientComponent, ProductComponent productComponent, OrderComponent orderComponent, ProductService productService) {
         this.clientComponent = clientComponent;
         this.productComponent = productComponent;
         this.orderComponent = orderComponent;
+        this.productService = productService;
     }
 
     @Override
@@ -28,6 +32,7 @@ public class DataLoader implements CommandLineRunner {
         clientComponent.initializeData();
         log.info("Loading data for products");
         productComponent.initializeData();
+        productService.initializeData();
         log.info("Loading data for orders");
         orderComponent.initializeData();
 

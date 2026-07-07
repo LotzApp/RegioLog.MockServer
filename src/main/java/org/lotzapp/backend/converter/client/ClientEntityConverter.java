@@ -24,9 +24,10 @@ public class ClientEntityConverter implements IConverter<Client, ClientEntity> {
         var result = new Client();
 
         if(clientEntity.getLocations() != null) {
-            clientEntity.getLocations().stream()
-                    .map(locationEntityConverter::toRest)
-                    .forEach(result::addLocationsItem);
+            for(var location : clientEntity.getLocations()) {
+                var restLocation = locationEntityConverter.toRest(location);
+                result.addLocationsItem(restLocation);
+            }
         }
 
         if(clientEntity.getDeliveryRhythms() != null) {
@@ -35,6 +36,7 @@ public class ClientEntityConverter implements IConverter<Client, ClientEntity> {
                     .forEach(result::addDeliveryRhythmsItem);
         }
         result.id(clientEntity.getId());
+        result.isPartner(clientEntity.isPartner());
         return result;
     }
 
@@ -53,7 +55,7 @@ public class ClientEntityConverter implements IConverter<Client, ClientEntity> {
                     .collect(Collectors.toList()));
         }
 
-
+        result.isPartner(client.getIsPartner());
         return result.build();
     }
 }

@@ -179,15 +179,15 @@ public class RequestAspect {
             case "getBioControlServices" -> getBioControlServices();
             case "getCategories" -> getCategoriesResponse();
             case "getLevels" -> getLevels();
-            case "updatePartnerProduct" -> productComponent.updateProduct(joinPoint.getArgs());
+            //case "updatePartnerProduct" -> productComponent.updateProduct(joinPoint.getArgs());
             case "addRequest" -> RequestComponent.addRequest(joinPoint.getArgs());
-            case "getProducts" -> productComponent.getProducts(joinPoint.getArgs());
-            case "getProductById" -> {
+            //case "getProducts" -> productComponent.getProducts(joinPoint.getArgs());
+            /*case "getProductById" -> {
                 var product = productComponent.getProduct(joinPoint.getArgs());
                 if (product == null) yield ResponseEntity.notFound().build();
                 TimeUtils.handleSpecialNames(product.getData().getName());
                 yield ResponseEntity.ok(product);
-            }
+            }*/
             case "getOrders" -> orderComponent.getOrders(joinPoint.getArgs());
             case "getOrdersById" -> {
                 var orders = orderComponent.getOrder(joinPoint.getArgs());

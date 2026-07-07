@@ -1,4 +1,4 @@
-package org.lotzapp.backend.service;
+package org.lotzapp.backend.service.client;
 
 import java.time.OffsetDateTime;
 import java.util.*;

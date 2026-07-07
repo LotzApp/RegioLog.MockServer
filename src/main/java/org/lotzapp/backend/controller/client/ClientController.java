@@ -1,4 +1,4 @@
-package org.lotzapp.backend.controller;
+package org.lotzapp.backend.controller.client;
 
 import org.lotzapp.component.ClientComponent;
 import org.lotzapp.regiologapi.api.ClientApi;

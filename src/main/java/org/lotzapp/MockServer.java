@@ -8,8 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+@EnableTransactionManagement
 @ComponentScan(
         basePackages = {"org.lotzapp"},
         excludeFilters = {
@@ -23,7 +25,10 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
                 ),
                 @ComponentScan.Filter(
                         type = FilterType.ASSIGNABLE_TYPE,
-                        classes = org.lotzapp.regiologapi.api.ClientApiController.class
+                        classes = {
+                                org.lotzapp.regiologapi.api.ClientApiController.class,
+                                org.lotzapp.regiologapi.api.ProductApiController.class
+                        }
                 )
         },
         nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class

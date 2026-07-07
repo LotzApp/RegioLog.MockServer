@@ -1,4 +1,4 @@
-package org.lotzapp.backend.service;
+package org.lotzapp.backend.service.client;
 
 import lombok.extern.slf4j.Slf4j;
 import org.lotzapp.backend.ReflectionUpdater;

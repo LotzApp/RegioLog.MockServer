@@ -1,7 +1,7 @@
-package org.lotzapp.backend.controller;
+package org.lotzapp.backend.controller.client;
 
-import org.lotzapp.backend.service.DeliveryRhythmService;
-import org.lotzapp.backend.service.LocationService;
+import org.lotzapp.backend.service.client.DeliveryRhythmService;
+import org.lotzapp.backend.service.client.LocationService;
 import org.lotzapp.regiologapi.model.DeliveryRhythm;
 import org.lotzapp.regiologapi.model.Location;
 import org.springframework.beans.factory.annotation.Autowired;

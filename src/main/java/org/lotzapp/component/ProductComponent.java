@@ -1,6 +1,5 @@
 package org.lotzapp.component;
 
-import org.lotzapp.backend.service.PriceService;
 import org.lotzapp.regiologapi.model.*;
 import org.lotzapp.util.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +16,12 @@ import java.util.UUID;
 public class ProductComponent {
     private final List<ProductPage> PRODUCT_PAGES = new ArrayList<>();
     private final List<Product> ALL_PRODUCTS = new ArrayList<>();
-    private final PriceService priceService;
 
     private final ClientComponent clientComponent;
 
     @Autowired
-    public ProductComponent(PriceService priceService, ClientComponent clientComponent) {
+    public ProductComponent(ClientComponent clientComponent) {
         this.clientComponent = clientComponent;
-        this.priceService = priceService;
     }
 
     public void initializeData() {
@@ -128,11 +125,6 @@ public class ProductComponent {
                 .filter(p -> p.getId().equals(uuid))
                 .findFirst()
                 .orElse(null);
-
-        if(product != null) {
-            var currentPrice = product.getPrices().get().getFirst();
-            currentPrice.net(new BigDecimal(priceService.getAllPrices().getFirst().getValue()));
-        }
         return product;
     }
 }

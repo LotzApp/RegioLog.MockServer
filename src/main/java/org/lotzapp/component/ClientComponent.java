@@ -2,9 +2,9 @@ package org.lotzapp.component;
 
 import lombok.Getter;
 import org.jspecify.annotations.NonNull;
-import org.lotzapp.backend.service.ClientService;
-import org.lotzapp.backend.service.DeliveryRhythmService;
-import org.lotzapp.backend.service.LocationService;
+import org.lotzapp.backend.service.client.ClientService;
+import org.lotzapp.backend.service.client.DeliveryRhythmService;
+import org.lotzapp.backend.service.client.LocationService;
 import org.lotzapp.regiologapi.model.*;
 import org.lotzapp.util.TimeUtils;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -83,8 +83,10 @@ public class ClientComponent {
     }
 
     //UUID mapping
-    client = clientService.addClient(client);
     client.setIsPartner(!clientList.isEmpty());
+    client = clientService.addClient(client);
+
+    // ## Not stored in DB
     client.setDomain(domain);
     client.setCreatedAt(OffsetDateTime.now());
     client.setLastUpdate(OffsetDateTime.now());
