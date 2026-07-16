@@ -39,7 +39,10 @@ public class RegioLogProductController implements ProductApi {
 
   @Override
   public ResponseEntity<Product> getProductById(UUID productId, String xRequestId) {
-    return ProductApi.super.getProductById(productId, xRequestId);
+    var product = productService.getProductById(productId);
+      return product.map(ResponseEntity::ok)
+              .orElseGet(() -> ResponseEntity.notFound().build());
+
   }
 
   @Override

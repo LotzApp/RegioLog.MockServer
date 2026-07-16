@@ -1,6 +1,5 @@
 package org.lotzapp.backend.service.product;
 
-import jakarta.transaction.Transactional;
 import org.lotzapp.backend.converter.product.RegioLogProductEntityConverter;
 import org.lotzapp.backend.entity.product.PriceEntity;
 import org.lotzapp.backend.entity.product.ProductEntity;
@@ -12,10 +11,13 @@ import org.lotzapp.regiologapi.model.ProductStatus;
 import org.lotzapp.regiologapi.model.ProductVisibility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 @Service
@@ -70,7 +72,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(2)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(2.8, 19),
+                        buildPriceEntity(2.6, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -79,7 +84,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(276)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.8, 19),
+                        buildPriceEntity(1.65, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -88,7 +96,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(3)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(3.2, 19),
+                        buildPriceEntity(2.95, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -97,7 +108,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(4)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.9, 19),
+                        buildPriceEntity(1.75, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -106,7 +120,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.6, 19),
+                        buildPriceEntity(1.45, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -115,7 +132,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(3)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(5.5, 19),
+                        buildPriceEntity(5.0, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -124,7 +144,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(2)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(4.8, 19),
+                        buildPriceEntity(4.4, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -133,7 +156,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(2.2, 19),
+                        buildPriceEntity(2.0, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -142,7 +168,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.7, 19),
+                        buildPriceEntity(1.55, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -151,7 +180,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(4)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(0.9, 19),
+                        buildPriceEntity(0.8, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -160,7 +192,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.1, 19),
+                        buildPriceEntity(0.99, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -169,7 +204,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(3)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(3.5, 19),
+                        buildPriceEntity(3.2, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -178,7 +216,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(4)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(0.75, 19),
+                        buildPriceEntity(0.65, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -187,7 +228,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.8, 19),
+                        buildPriceEntity(1.65, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -196,7 +240,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(6.5, 19),
+                        buildPriceEntity(5.9, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -205,7 +252,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(4)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.2, 19),
+                        buildPriceEntity(1.05, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -214,7 +264,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(2)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(5.8, 19),
+                        buildPriceEntity(5.3, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -223,7 +276,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(1)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(1.4, 19),
+                        buildPriceEntity(1.25, 7)
+                ))
                 .assortments(List.of())
                 .build(),
             ProductEntity.builder()
@@ -232,7 +288,10 @@ public class ProductService {
                 .productVisibility(ProductVisibility.VISIBLE)
                 .salesUnitId(3)
                 .originCountryId(40)
-                .prices(List.of())
+                .prices(List.of(
+                        buildPriceEntity(3.8, 19),
+                        buildPriceEntity(3.4, 7)
+                ))
                 .assortments(List.of())
                 .build());
 
@@ -248,7 +307,7 @@ public class ProductService {
     productRepository.saveAll(products);
   }
 
-  @Transactional
+  @Transactional(readOnly = true)
   public List<Product> getPartnerProducts() {
     var ownClientId = clientService.getOwnClientId();
     var partnerProducts = new ArrayList<ProductEntity>();
@@ -259,5 +318,17 @@ public class ProductService {
       }
     }
     return productEntityConverter.toRest(partnerProducts);
+  }
+
+  /**
+   * Retrieves a product by its unique identifier.
+   *
+   * @param productId the unique identifier of the product to retrieve
+   * @return an {@code Optional} containing the product if found, or an empty {@code Optional} if not found
+   */
+  @Transactional(readOnly = true)
+  public Optional<Product> getProductById(UUID productId) {
+    return productRepository.findById(productId)
+            .map(productEntityConverter::toRest);
   }
 }

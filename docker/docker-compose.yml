@@ -15,16 +15,16 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: unless-stopped
-    ports:
-      - "8080:80"
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: root
-    depends_on:
-      - mysql
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    container_name: phpmyadmin
+#    restart: unless-stopped
+#    ports:
+#      - "8080:80"
+#    environment:
+#      PMA_HOST: mysql
+#      PMA_PORT: 3306
+#      PMA_USER: root
+#      PMA_PASSWORD: root
+#    depends_on:
+#      - mysql
