@@ -59,6 +59,8 @@ public class RegioLogProductController implements ProductApi {
   @Override
   public ResponseEntity<Product> updateProduct(
       UUID productId, ProductUpsert productUpsert, String xRequestId) {
-    return ProductApi.super.updateProduct(productId, productUpsert, xRequestId);
+    var result = productService.upsertProduct(productId, productUpsert);
+    if (result == null) return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(result);
   }
 }
