@@ -120,11 +120,11 @@ public class ClientComponent {
 
   public ResponseEntity<Client> updateClient(ClientUpdate update) {
     if(update.getLocations().isPresent()) updateLocations(update.getLocations().get());
-    return ResponseEntity.ok(clientList.stream()
+    var client = clientList.stream()
             .filter(cl -> !cl.getIsPartner())
             .findFirst()
-            .orElseThrow()
-    );
+            .orElseThrow();
+    return ResponseEntity.ok(getClient(client.getId().get()));
   }
 
   private void updateLocations(List<LocationUpsert> locationUpserts) {

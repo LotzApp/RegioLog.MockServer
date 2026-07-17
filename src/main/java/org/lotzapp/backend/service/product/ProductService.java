@@ -231,6 +231,24 @@ public class ProductService {
                 .originCountryId(40)
                 .prices(List.of(buildPriceEntity(3.8, 19), buildPriceEntity(3.4, 7)))
                 .assortments(List.of())
+                .build(),
+            ProductEntity.builder()
+                .name("Kürbiskernöl 250ml")
+                .status(ProductStatus.ACTIVE)
+                .productVisibility(ProductVisibility.VISIBLE)
+                .salesUnitId(1)
+                .originCountryId(40)
+                .prices(List.of(buildPriceEntity(7.5, 19), buildPriceEntity(6.9, 7)))
+                .assortments(List.of())
+                .build(),
+            ProductEntity.builder()
+                .name("Haferflocken zart 500g")
+                .status(ProductStatus.ACTIVE)
+                .productVisibility(ProductVisibility.VISIBLE)
+                .salesUnitId(1)
+                .originCountryId(40)
+                .prices(List.of(buildPriceEntity(1.3, 19), buildPriceEntity(1.15, 7)))
+                .assortments(List.of())
                 .build());
 
     IntStream.range(0, products.size())
@@ -280,6 +298,7 @@ public class ProductService {
     productRepository.save(productEntity);
     return productEntityConverter.toRest(productEntity);
   }
+
   private void updateProductData(ProductEntity productEntity, ProductData data) {
     productEntity.setName(data.getName());
     productEntity.setStatus(data.getStatus());

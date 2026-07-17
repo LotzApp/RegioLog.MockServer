@@ -8,6 +8,7 @@ import org.jspecify.annotations.NonNull;
 import org.lotzapp.adminapi.model.Application;
 import org.lotzapp.adminapi.model.UserBase;
 import org.lotzapp.adminapi.model.UserStatus;
+import org.lotzapp.backend.service.mock.MockService;
 import org.lotzapp.component.ClientComponent;
 import org.lotzapp.component.OrderComponent;
 import org.lotzapp.component.ProductComponent;
@@ -38,14 +39,13 @@ import static org.lotzapp.component.UserComponent.getUsersResponse;
 @Component
 @Slf4j
 public class RequestAspect {
-
-    private final ProductComponent productComponent;
     private final OrderComponent orderComponent;
+    private final MockService mockService;
 
     @Autowired
-    public RequestAspect(ProductComponent productComponent, OrderComponent orderComponent) {
-        this.productComponent = productComponent;
+    public RequestAspect(OrderComponent orderComponent, MockService mockService) {
         this.orderComponent = orderComponent;
+        this.mockService = mockService;
     }
 
     private ResponseEntity<?> getAccountData(String userName) {
@@ -160,6 +160,13 @@ public class RequestAspect {
         }
 
         var method = joinPoint.getSignature().getName();
+        if (request != null) {
+            log.info("Requesting URL: {}", request.getRequestURI());
+            var response = mockService.getResponse(request.getRequestURI());
+            if (response != null) {
+               return ResponseEntity.status(response).build();
+            }
+        }
         log.info("Calling: {} with {}", method, joinPoint.getArgs());
 
 

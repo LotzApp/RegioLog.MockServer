@@ -66,7 +66,8 @@ public class LocationService {
     updateLocation(locationEntity.get(), location);
     locationEntity.get().setLastUpdate(OffsetDateTime.now());
 
-    return locationEntityConverter.toRest(locationRepository.save(locationEntity.get()));
+    var result = locationRepository.save(locationEntity.get());
+    return locationEntityConverter.toRest(result);
   }
 
   public List<Location> getDefaultLocations() {
