@@ -1,5 +1,6 @@
 package org.lotzapp.backend.repository.product;
 
+import org.hibernate.annotations.processing.SQL;
 import org.lotzapp.backend.entity.product.PriceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
